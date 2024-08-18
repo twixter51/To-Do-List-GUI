@@ -14,8 +14,8 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 
 	wxButton* removeButton = new wxButton(panel, wxID_ANY, "Remove Item", wxPoint(25, 350), wxSize(200, 50));
 	wxButton* setPriority = new wxButton(panel, wxID_ANY, "Prioritize", wxPoint(550, 500), wxSize(200, 50));
-	wxStaticText* tempPriorityText = new wxStaticText(panel, wxID_ANY, "Set the priority of any task, ones you would love to finish quick!", wxPoint(450, 470), wxDefaultSize);
-
+	wxStaticText* tempPriorityText = new wxStaticText(panel, wxID_ANY, "Set the priority of any task, ones you would love to finish quick!", wxPoint(450, 550), wxDefaultSize);
+	wxStaticText* legendText = new wxStaticText(panel, wxID_ANY, "Legend: Highlighted/Blue = #1 Priority, Red = Subsequent Tasks", wxPoint(220, 570), wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL);
 
 
 	wxStaticText* barText = new wxStaticText(panel, wxID_ANY, "Enter Tasks: ", wxPoint(25, 430), wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL);
@@ -36,11 +36,13 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 	listCtrl->InsertColumn(0, "");
 	listCtrl->SetColumnWidth(0, 1000);
 	listCtrl->EnableSystemTheme(false);
+	listCtrl->Bind(wxEVT_LIST_ITEM_SELECTED, &MainFrame::onItemSelected, this); 
 
 	//Setting Font Sizes
 	wxFont font = staticText->GetFont();
 	font.SetPointSize(20);  // Set the desired font size
 	staticText->SetFont(font);
+	
 
 	wxFont font2 = yourListText->GetFont();
 	font2.SetPointSize(15);  // Set the desired font size
@@ -51,9 +53,8 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 	font3.SetPointSize(15);// Set the desired font size
 	font3.SetFamily(wxFONTFAMILY_SCRIPT);
 	listCtrl ->SetFont(font3);
+	legendText->SetFont(font3);
 
-	
-	
 
 }
 
@@ -101,6 +102,7 @@ void MainFrame::onButtonClicked(wxCommandEvent& evt) {
 }
 
 
+
 void MainFrame::onTextEntered(wxCommandEvent& evt) {
 	wxString getText = textEntryPoint->GetValue();
 	
@@ -115,24 +117,52 @@ void MainFrame::onTextEntered(wxCommandEvent& evt) {
 }
 
 
+
+void MainFrame::onItemSelected(wxListEvent& evt) {
+
+//to be added in future update
+
+
+}
+
 void MainFrame::onPriorityClicked(wxCommandEvent& evt) {
 	wxArrayInt selections;
 	int item = -1;
-	//item = listCtrl->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
 	while ((item = listCtrl->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) != -1) {
 		selections.Add(item + 1);	
 	}
 
 	wxString str;
+	wxColour highlightColor(252, 169, 3);
+	wxColour priorityColor(204, 207, 186);
+	wxString num1Priority;
+	if (selections.GetCount() <= 0) {
+		wxLogMessage("Please select tasks you would like to prioritize");
+		return;
+	}
 	for (int i = 0; i < selections.GetCount(); ++i) {
 		if (i > 0){
 			str += ", ";
 		}
 		
 		str += "Prioritized: " + wxString::Format("%d", selections[i]);
-		
-		listCtrl->SetItemBackgroundColour((selections[i]) - 1, BACKGROUND_RED);
-	}
 
-	wxLogMessage(str);
+		//if we already have prioritized
+		if (listCtrl->GetItemTextColour((selections[i]) - 1) == wxColour("orange")) {
+			listCtrl->SetItemTextColour((selections[i]) - 1, wxColour("blue"));
+			num1Priority +=  "( #1 PRIORITY: "  + wxString::Format("%d", selections[i]) + " )";
+			listCtrl->SetItemBackgroundColour((selections[i]) - 1, priorityColor);
+		}
+		else {
+			listCtrl->SetItemTextColour((selections[i]) - 1, wxColour("orange"));
+		}
+		
+
+	}
+	
+
+
+	//remove selections
+	listCtrl->SetItemState(-1, 0, wxLIST_STATE_SELECTED);
+	wxLogMessage(str + " "  + num1Priority);
 }
