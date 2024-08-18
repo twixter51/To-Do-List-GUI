@@ -14,6 +14,7 @@ private:
 	void onButtonClicked(wxCommandEvent& evt);
 	void onTextEntered(wxCommandEvent& evt);
 	void onPriorityClicked(wxCommandEvent& evt);
+	void onItemSelected(wxListEvent& evt);
 	wxArrayString choices;
 	wxListCtrl* listCtrl;
 	wxPanel* panel;
