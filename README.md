@@ -5,11 +5,6 @@ This is my first project, the code may not look that nice (FOR NOW) but please b
 
 Since I'm using wxWidgets, this UI is cross-platform, current features include:
 
-
-
-v.1  
-
-
 -- Add tasks by typing into a search bar
 
 
@@ -18,8 +13,12 @@ v.1
 
 -- Checks to ensure there are tasks entered
 
+-- *new* priority feature (set priority to any task you like! there are currently 2 forms, normal priority (red), #1 priority (blue/with highlight)
 
--- Prioritize Feature (Prioritize tasks that you deem most important) (W.I.P)
+-- more to come
+
+ # curr version: V.1.1
+
 
 # Planned Updates
--- V.1.1 (Finished Prioritize feature)
+-- V.1.2 (Code clean-up/better coloration on priority feature)
