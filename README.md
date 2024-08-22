@@ -19,7 +19,7 @@ Since I'm using wxWidgets, this UI is cross-platform, current features include:
 
 -- more to come
 
- # curr version: V.1.2
+ # curr version: V.1.25
  
 
 
