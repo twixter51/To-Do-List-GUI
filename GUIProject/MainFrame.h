@@ -30,8 +30,6 @@ private:
 	// More variables used for checking task selections
 	int selectCount;
 	int itemNum;
-
-
 	//Extra Variables
 	bool hasEnteredTasks = false;
 };

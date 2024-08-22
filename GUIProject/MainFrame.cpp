@@ -15,11 +15,6 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 	wxStaticText* barText = new wxStaticText(panel, wxID_ANY, "Enter Tasks: ", wxPoint(25, 430), wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL);
 
 
-
-
-	
-	
-
 	//List
 	listCtrl = new wxListCtrl(panel, wxID_ANY, wxPoint(25, 150), wxSize(400, 200), wxLC_REPORT | wxLC_NO_HEADER);
 	listCtrl->InsertColumn(0, "");
@@ -57,7 +52,7 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 
 
 void MainFrame::onButtonClicked(wxCommandEvent& evt) {
-	// Get selected items
+	 //Get selected items
 	wxArrayInt selections;
 
 	int item = -1;
@@ -84,16 +79,29 @@ void MainFrame::onButtonClicked(wxCommandEvent& evt) {
 		}
 
 		wxLogStatus("Removed " + removedItems);
+
+		//small check to display a congratulations message
+		if (listCtrl->GetItemCount() == 0 && hasEnteredTasks == true) {
+			wxLogMessage("Congratulations, you are done for the day!!!");
+		}
+
 	}
-	else if (listCtrl->GetItemCount() == 0 && hasEnteredTasks == false) {
+
+	else {
+		wxLogMessage(listCtrl->GetItemCount() == 0 ? (!hasEnteredTasks ? "Type in tasks in the search bar below to get started!" : "Congratulations! you have finished all your tasks for the day! Add more anytime!") : "Please select a Task!");
+	}
+	
+	
+	
+	/*else if (listCtrl->GetItemCount() == 0 && hasEnteredTasks == false) {
 		wxLogMessage("Type in tasks in the search bar below to get started!");
 	}
 	else if (listCtrl->GetItemCount() == 0 && hasEnteredTasks == true) {
 		wxLogMessage("Congratulations! you have finished all your tasks for the day!");
 	}
-	else {
+	else{
 		wxLogMessage("Please select a task!");
-	}
+	}*/
 	
 }
 
@@ -109,7 +117,6 @@ void MainFrame::onTextEntered(wxCommandEvent& evt) {
 	listCtrl->SetItemText(itemNum, std::to_string(itemNum + 1) + ". " + getText);
 	hasEnteredTasks = true;
 
-	
 }
 
 
