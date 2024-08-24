@@ -13,15 +13,21 @@ Since I'm using wxWidgets, this UI is cross-platform, current features include:
 
 -- Checks to ensure there are tasks entered
 
--- *new* priority feature (set priority to any task you like! there are currently 2 forms, normal priority (red), #1 priority (blue/with highlight)
+--  priority feature (set priority to any task you like! there are currently 2 forms, yellow (normal priority), red (urgency)
 
--- *new* prioritize features for better readability, color enhancements, tooltips.
+-- prioritize features for better readability, color enhancements, tooltips.
 
--- more to come
+-- **new** remove all tasks button
 
- # curr version: V.1.25
+-- **new** remove all priorities button
+
+-- **new** prompt logic is now better
+
+-- Next update will include the final implementation of the project with a saving system. Then I'm finished! 
+
+ # curr version: V.1.5
  
 
 
 # Planned Updates
--- V.1.3 (Code clean-up)
+-- V.2.0 --Clean Up Code, Finish project, add saving
