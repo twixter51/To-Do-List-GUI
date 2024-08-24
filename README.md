@@ -1,4 +1,4 @@
-# To-Do-List-GUI
+# To-Do-List-GUI (Guide on how to set up in code-space soon, you will need wxWidgets)
 Uses wxWidgets Library (C++)
 
 This is my first project, the code may not look that nice (FOR NOW) but please bear with me :).
