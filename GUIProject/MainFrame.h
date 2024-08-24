@@ -19,7 +19,8 @@ private:
 	//buttons
 	wxButton* setPriority;
 	wxButton* removeButton;
-
+	wxButton* removeAll;
+	wxButton* removePriority;
 	//Selections variables
 	wxArrayString choices;
 	wxListCtrl* listCtrl;
