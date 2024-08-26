@@ -31,3 +31,5 @@ Since I'm using wxWidgets, this UI is cross-platform, current features include:
 
 # Planned Updates
 -- V.2.0 --Clean Up Code, Finish project, add saving
+
+# still under works!!!
