@@ -1,4 +1,4 @@
-# To-Do-List-GUI (Guide on how to set up in code-space soon, you will need wxWidgets)
+# To-Do-List-GUI (WxWidgets) Guide On Set-Up Soon
 Uses wxWidgets Library (C++)
 
 This is my first project, the code may not look that nice (FOR NOW) but please bear with me :).
@@ -7,9 +7,7 @@ Since I'm using wxWidgets, this UI is cross-platform, current features include:
 
 -- Add tasks by typing into a search bar
 
-
 -- Remove tasks by selecting one or many
-
 
 -- Checks to ensure there are tasks entered
 
@@ -17,19 +15,20 @@ Since I'm using wxWidgets, this UI is cross-platform, current features include:
 
 -- prioritize features for better readability, color enhancements, tooltips.
 
--- **new** remove all tasks button
+-- remove all tasks button
 
--- **new** remove all priorities button
+-- remove all priorities button
 
--- **new** prompt logic is now better
+-- prompt logic is now better
 
--- Next update will include the final implementation of the project with a saving system. Then I'm finished! 
+-- Saving system, saves your data to SavesFile1.txt
 
- # curr version: V.1.5
+
+ # curr version: V.2.0
  
 
 
 # Planned Updates
--- V.2.0 --Clean Up Code, Finish project, add saving
+-- Release V.1 --Soon just have to set up gitHub codeSpace so if you want you could contribute to this project
 
-# still under works!!!
+
