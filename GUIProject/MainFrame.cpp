@@ -2,12 +2,14 @@
 #include <wx/wx.h>
 #include <wx/listctrl.h>
 #include <algorithm>
+#include <wx/textfile.h>
+#include <wx/ffile.h>
+
 
 
 MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) {
 	panel = new wxPanel(this);
-
-
+	
 	//Static Texts
 	wxStaticText* mainText = new wxStaticText(panel, wxID_ANY, "ToDo-List", wxPoint(345, 10), wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL);
 	wxStaticText* yourListText = new wxStaticText(panel, wxID_ANY, "Your List", wxPoint(25, 120), wxDefaultSize);
@@ -49,6 +51,23 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 	removePriority->Bind(wxEVT_BUTTON, &MainFrame::onPriorityClicked, this);
 	CreateStatusBar();
 
+
+
+
+	// DATA SAVING SYSTEM
+	// Create Files
+	file.Create("SaveFile1.txt");
+	//upload save to file
+	if (file.Open())
+	{
+		wxString line;
+		for (line = file.GetFirstLine(); !file.Eof(); line = file.GetNextLine())
+		{
+			listCtrl->InsertItem(listCtrl->GetItemCount(), line);
+			
+		}
+		file.Close();
+	}
 }
 
 
@@ -73,6 +92,13 @@ void MainFrame::onButtonClicked(wxCommandEvent& evt) {
 		if (result == wxID_YES)
 		{
 			listCtrl->DeleteAllItems();
+			
+			file.Open();
+			file.Clear();
+			file.Write();
+			file.Close();
+		
+			
 			wxLogMessage("Congratulations, you are done for the day!!!");
 			return;
 		}
@@ -84,6 +110,7 @@ void MainFrame::onButtonClicked(wxCommandEvent& evt) {
 	////
 
 	wxString removedItems;
+	wxString txt;
 	if (listCtrl->GetItemCount() != 0 && !selections.IsEmpty()) {
 		// Sort selections in descending order
 		std::sort(selections.begin(), selections.end(), std::greater<int>());
@@ -96,10 +123,24 @@ void MainFrame::onButtonClicked(wxCommandEvent& evt) {
 			removedItems += listCtrl->GetItemText(selections[i]);
 		}
 
-		// Remove selected items
+		// Remove selected items and save to file
 		for (int j : selections) {
+			if (file.Open())
+			{
+				int lineCount = file.GetLineCount();
+				for (int i = 0; i < lineCount; ++i) {
+					if (file.GetLine(i) == listCtrl->GetItemText(j)) {
+						file.RemoveLine(i);
+						file.Write();
+						break; 
+					}
+				}
+
+				file.Close();
+			}
 			listCtrl->DeleteItem(j);
 		}
+
 
 		wxLogStatus("Removed " + removedItems);
 
@@ -131,7 +172,14 @@ void MainFrame::onTextEntered(wxCommandEvent& evt) {
 	//we set our item text here again to ensure proper numbering
 	listCtrl->SetItemText(itemNum, std::to_string(itemNum + 1) + ". " + getText);
 	hasEnteredTasks = true;
+	
+	
+	wxFile saveFile2("SaveFile1.txt", wxFile::write_append);
+	saveFile2.Write(listCtrl->GetItemText(itemNum) + "\n");
 
+	saveFile2.Close();
+	
+	
 }
 
 

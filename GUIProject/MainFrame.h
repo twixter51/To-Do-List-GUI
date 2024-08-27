@@ -1,14 +1,16 @@
 #pragma once
 #include <wx/wx.h>
 #include <wx/listctrl.h>
-
+#include <wx/textfile.h>
+#include <wx/ffile.h>
 
 class MainFrame: public wxFrame
 {
 
 public: 
 	MainFrame(const wxString& title);
-
+	
+	
 private:
 	//Main methods
 	void onButtonClicked(wxCommandEvent& evt);
@@ -33,5 +35,10 @@ private:
 	int itemNum;
 	//Extra Variables
 	bool hasEnteredTasks = false;
+
+	//Files for saving data
+	wxTextFile file;
+
+
 };
 
