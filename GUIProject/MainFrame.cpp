@@ -17,11 +17,11 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 	wxStaticText* barText = new wxStaticText(panel, wxID_ANY, "Enter Tasks: ", wxPoint(25, 430), wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL);
 
 
-	//List
+	//List To display Tasks
 	listCtrl = new wxListCtrl(panel, wxID_ANY, wxPoint(25, 150), wxSize(424, 200), wxLC_REPORT | wxLC_NO_HEADER);
 	listCtrl->InsertColumn(0, "");
 	listCtrl->SetColumnWidth(0, 1000);
-	//listCtrl->EnableSystemTheme(false);
+
 
 	//TextBars
 	textEntryPoint = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(25, 450), wxSize(350, 25), wxTE_PROCESS_ENTER);
@@ -174,6 +174,7 @@ void MainFrame::onTextEntered(wxCommandEvent& evt) {
 	hasEnteredTasks = true;
 	
 	
+	//save entered tasks
 	wxFile saveFile2("SaveFile1.txt", wxFile::write_append);
 	saveFile2.Write(listCtrl->GetItemText(itemNum) + "\n");
 
