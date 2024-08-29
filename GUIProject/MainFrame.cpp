@@ -21,7 +21,7 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) 
 	listCtrl = new wxListCtrl(panel, wxID_ANY, wxPoint(25, 150), wxSize(424, 200), wxLC_REPORT | wxLC_NO_HEADER);
 	listCtrl->InsertColumn(0, "");
 	listCtrl->SetColumnWidth(0, 1000);
-	listCtrl->EnableSystemTheme(false);
+	//listCtrl->EnableSystemTheme(false);
 
 	//TextBars
 	textEntryPoint = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(25, 450), wxSize(350, 25), wxTE_PROCESS_ENTER);
